@@ -7,8 +7,7 @@
 
 struct CurrentWeather {
     let name: String
-    let country: String
-    let weather: Weather
+    let weather: [Weather]
     let main: Main
     let wind: Wind
 }

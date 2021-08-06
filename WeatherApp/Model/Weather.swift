@@ -6,6 +6,5 @@
 //
 
 struct Weather {
-    let main: String
     let description: String
 }
