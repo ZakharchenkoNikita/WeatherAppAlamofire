@@ -5,6 +5,6 @@
 //  Created by Nikita on 06.08.21.
 //
 
-struct Weather {
+struct Weather: Decodable {
     let description: String
 }

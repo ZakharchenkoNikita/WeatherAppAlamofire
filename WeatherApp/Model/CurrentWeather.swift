@@ -5,9 +5,8 @@
 //  Created by Nikita on 06.08.21.
 //
 
-struct CurrentWeather {
+struct CurrentWeather: Decodable {
     let name: String
     let weather: [Weather]
     let main: Main
-    let wind: Wind
 }
