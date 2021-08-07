@@ -22,9 +22,8 @@ struct NetworkWeatherManager {
     }
     
     private func parseJSON(data: Data) -> CurrentWeather? {
-        let decoder = JSONDecoder()
-        
         do {
+            let decoder = JSONDecoder()
             let currentWether = try decoder.decode(CurrentWeather.self, from: data)
             return currentWether
         } catch let error {
