@@ -17,7 +17,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var minimumTempLabel: UILabel!
     
     // MARK: properties
-    var networkManager = NetworkWeatherManager()
+    var networkManager = NetworkWeatherManager.shared
     
     // MARK: override methods
     override func viewDidLoad() {

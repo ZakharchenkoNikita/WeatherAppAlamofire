@@ -6,7 +6,9 @@
 //
 import Foundation
 
-struct NetworkWeatherManager {
+class NetworkWeatherManager {
+    
+    static let shared = NetworkWeatherManager()
     
     func fetchCurrentWeather(city: String, completionHandler: @escaping (CurrentWeather) -> Void) {
         let weatherAPI = "https://api.openweathermap.org/data/2.5/weather?q=\(city)&appid=1559fdc665dcb90d99eec360d3c64f29"
@@ -32,4 +34,6 @@ struct NetworkWeatherManager {
         
         return nil
     }
+    
+    private init() {}
 }
