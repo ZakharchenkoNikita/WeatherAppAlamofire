@@ -27,14 +27,14 @@ class ViewController: UIViewController {
     
     // MARK: private methods
     private func getWeather() {
-        networkManager.fetchCurrentWeather(city: "London") { currentWeather in
+        networkManager.fetchWeather(city: "Berlin") { currentWeather in
             DispatchQueue.main.async {
                 self.cityNameLabel.text = currentWeather.name
-                self.currentTempLabel.text = self.getTempInСelsius(value: currentWeather.main.temp)
-                self.maximumTempLabel.text = self.getTempInСelsius(value: currentWeather.main.temp_max)
-                self.minimumTempLabel.text = self.getTempInСelsius(value: currentWeather.main.temp_min)
+                self.currentTempLabel.text = self.getTempInСelsius(value: currentWeather.main?.temp ?? 0)
+                self.maximumTempLabel.text = self.getTempInСelsius(value: currentWeather.main?.tempMax ?? 0)
+                self.minimumTempLabel.text = self.getTempInСelsius(value: currentWeather.main?.tempMin ?? 0)
                 
-                currentWeather.weather.forEach { weather in
+                currentWeather.weather?.forEach { weather in
                     self.weatherStatusLabel.text = weather.description
                 }
             }

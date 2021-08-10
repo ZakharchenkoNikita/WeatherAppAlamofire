@@ -6,5 +6,11 @@
 //
 
 struct Weather: Decodable {
-    let description: String
+    var description: String?
+    
+    init(values: [[String: Any]]) {
+        for value in values {
+            description = value["description"] as? String
+        }
+    }
 }
