@@ -24,8 +24,10 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         getWeather()
     }
-    
-    // MARK: private methods
+}
+
+// MARK: private methods
+extension ViewController {
     private func getWeather() {
         networkManager.fetchWeather(city: "Berlin") { currentWeather in
             DispatchQueue.main.async {
@@ -43,5 +45,18 @@ class ViewController: UIViewController {
     
     private func getTempInСelsius(value: Double) -> String {
         String(format: "%.0f", value - 273.15)
+    }
+    
+    private func callAlert() {
+        let alert = UIAlertController(title: "Поиск", message: "Введите город", preferredStyle: .alert)
+        
+        let searchAction = UIAlertAction(title: "Искать", style: .default) { _ in
+        }
+        let cancelAction = UIAlertAction(title: "Отменить", style: .default, handler: nil)
+        
+        alert.addAction(searchAction)
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true, completion: nil)
     }
 }
