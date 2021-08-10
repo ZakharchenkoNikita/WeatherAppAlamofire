@@ -59,6 +59,8 @@ extension ViewController {
         alert.addTextField { searchTF in
             searchTF.placeholder = "Введите город..."
             searchTF.returnKeyType = .search
+            searchTF.clearButtonMode = .whileEditing
+            searchTF.autocapitalizationType = .words
         }
         
         let searchAction = UIAlertAction(title: "Искать", style: .default) { _ in

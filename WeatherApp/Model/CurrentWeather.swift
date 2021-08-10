@@ -10,11 +10,11 @@ struct CurrentWeather: Decodable {
     let weather: [Weather]?
     let main: Main?
     
-    init(value: [String: Any]) {
-        let weatherDict = value["weather"] as? [[String: Any]] ?? [[:]]
-        let mainDict = value["main"] as? [String: Any] ?? [:]
+    init(currentWeather: [String: Any]) {
+        let weatherDict = currentWeather["weather"] as? [[String: Any]] ?? [[:]]
+        let mainDict = currentWeather["main"] as? [String: Any] ?? [:]
         
-        name = value["name"] as? String
+        name = currentWeather["name"] as? String
         weather = [Weather(values: weatherDict)]
         main = Main(value: mainDict)
     }

@@ -20,7 +20,7 @@ class NetworkWeatherManager {
                 switch dataResponse.result {
                 case .success(let value):
                     guard let currentWeather = value as? [String: Any] else { return }
-                    let weather = CurrentWeather.init(value: currentWeather)
+                    let weather = CurrentWeather(currentWeather: currentWeather)
                     completionHandler(weather)
                 case .failure(let error):
                     print(error)
