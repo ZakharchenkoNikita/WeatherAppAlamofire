@@ -11,7 +11,7 @@ struct Main: Decodable {
     let tempMax: Double?
     
     enum CodingKeys: String, CodingKey {
-        case temp = "temp"
+        case temp
         case tempMin = "temp_min"
         case tempMax = "temp_max"
     }

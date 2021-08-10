@@ -17,46 +17,70 @@ class ViewController: UIViewController {
     @IBOutlet weak var minimumTempLabel: UILabel!
     
     // MARK: properties
-    var networkManager = NetworkWeatherManager.shared
+    let networkManager = NetworkWeatherManager.shared
     
     // MARK: override methods
     override func viewDidLoad() {
         super.viewDidLoad()
         getWeather()
     }
+    
+    // MARK: IB Actions
+    @IBAction func searchButtonPressed() {
+        callSearchAlert()
+    }
 }
 
 // MARK: private methods
 extension ViewController {
+    
     private func getWeather() {
         networkManager.fetchWeather(city: "Berlin") { currentWeather in
-            DispatchQueue.main.async {
-                self.cityNameLabel.text = currentWeather.name
-                self.currentTempLabel.text = self.getTempInСelsius(value: currentWeather.main?.temp ?? 0)
-                self.maximumTempLabel.text = self.getTempInСelsius(value: currentWeather.main?.tempMax ?? 0)
-                self.minimumTempLabel.text = self.getTempInСelsius(value: currentWeather.main?.tempMin ?? 0)
-                
-                currentWeather.weather?.forEach { weather in
-                    self.weatherStatusLabel.text = weather.description
-                }
+            self.updateInterface(weather: currentWeather)
+        }
+    }
+    
+    private func updateInterface(weather: CurrentWeather) {
+        DispatchQueue.main.async {
+            self.cityNameLabel.text = weather.name ?? ""
+            self.currentTempLabel.text = self.getTempInСelsius(value: weather.main?.temp ?? 0)
+            self.maximumTempLabel.text = self.getTempInСelsius(value: weather.main?.tempMax ?? 0)
+            self.minimumTempLabel.text = self.getTempInСelsius(value: weather.main?.tempMin ?? 0)
+            
+            weather.weather?.forEach { weather in
+                self.weatherStatusLabel.text = weather.description ?? ""
             }
         }
     }
-    
-    private func getTempInСelsius(value: Double) -> String {
-        String(format: "%.0f", value - 273.15)
-    }
-    
-    private func callAlert() {
-        let alert = UIAlertController(title: "Поиск", message: "Введите город", preferredStyle: .alert)
+
+    private func callSearchAlert() {
+        let alert = UIAlertController(title: "Поиск", message: nil, preferredStyle: .alert)
+        
+        alert.addTextField { searchTF in
+            searchTF.placeholder = "Введите город..."
+            searchTF.returnKeyType = .search
+        }
         
         let searchAction = UIAlertAction(title: "Искать", style: .default) { _ in
+            guard let searchTF = alert.textFields?.first else { return }
+            guard let city = searchTF.text, !city.isEmpty else { return }
+            
+            let cityName = city.split(separator: " ").joined(separator: "%20")
+            
+            self.networkManager.fetchWeather(city: cityName) { currentWeather in
+                self.updateInterface(weather: currentWeather)
+            }
         }
-        let cancelAction = UIAlertAction(title: "Отменить", style: .default, handler: nil)
+        
+        let cancelAction = UIAlertAction(title: "Отменить", style: .cancel, handler: nil)
         
         alert.addAction(searchAction)
         alert.addAction(cancelAction)
         
         present(alert, animated: true, completion: nil)
+    }
+    
+    private func getTempInСelsius(value: Double) -> String {
+        String(format: "%.0f", value - 273.15)
     }
 }
