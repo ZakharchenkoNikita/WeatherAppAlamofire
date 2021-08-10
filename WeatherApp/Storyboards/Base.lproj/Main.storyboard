@@ -107,10 +107,22 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wIf-Er-71A">
+                                <rect key="frame" x="280" y="526" width="20" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="20" id="TQc-cL-V73"/>
+                                    <constraint firstAttribute="height" constant="22" id="fuf-db-GIn"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="tintColor" red="0.068670853970000001" green="0.71668744090000003" blue="0.83447259659999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" image="magnifyingglass.circle.fill" catalog="system"/>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="wIf-Er-71A" secondAttribute="bottom" constant="20" id="4JH-Oa-QWE"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="wIf-Er-71A" secondAttribute="trailing" constant="20" id="4TQ-ik-LM4"/>
                             <constraint firstItem="Jyi-uj-zt4" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="BQ5-gB-n77"/>
                             <constraint firstItem="Jyi-uj-zt4" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="eRF-qq-k6N"/>
                         </constraints>
@@ -125,10 +137,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="129" y="76"/>
+            <point key="canvasLocation" x="127.5" y="75"/>
         </scene>
     </scenes>
     <resources>
+        <image name="magnifyingglass.circle.fill" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
