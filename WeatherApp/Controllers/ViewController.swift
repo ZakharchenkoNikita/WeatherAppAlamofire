@@ -29,34 +29,6 @@ class ViewController: UIViewController {
     
     // MARK: IB Actions
     @IBAction func searchButtonPressed() {
-        callSearchAlert()
-    }
-}
-
-// MARK: private methods
-extension ViewController {
-    
-    private func getWeather() {
-        networkManager.fetchWeather(city: "Berlin") { currentWeather in
-            self.updateInterface(weather: currentWeather)
-        }
-    }
-    
-    private func updateInterface(weather: CurrentWeather) {
-        DispatchQueue.main.async {
-            self.cityNameLabel.text = weather.name ?? ""
-            self.currentTempLabel.text = self.getTempInСelsius(value: weather.main?.temp ?? 0)
-            self.maximumTempLabel.text = self.getTempInСelsius(value: weather.main?.tempMax ?? 0)
-            self.minimumTempLabel.text = self.getTempInСelsius(value: weather.main?.tempMin ?? 0)
-            
-            weather.weather?.forEach { weather in
-                self.weatherStatusLabel.text = weather.description ?? ""
-                self.weatherConditionImage.image = UIImage(systemName: weather.weatherConditions)
-            }
-        }
-    }
-
-    private func callSearchAlert() {
         let alert = UIAlertController(title: "Поиск", message: nil, preferredStyle: .alert)
         
         alert.addTextField { searchTF in
@@ -83,6 +55,30 @@ extension ViewController {
         alert.addAction(cancelAction)
         
         present(alert, animated: true, completion: nil)
+    }
+}
+
+// MARK: private methods
+extension ViewController {
+    
+    private func getWeather() {
+        networkManager.fetchWeather(city: "Berlin") { currentWeather in
+            self.updateInterface(weather: currentWeather)
+        }
+    }
+    
+    private func updateInterface(weather: CurrentWeather) {
+        DispatchQueue.main.async {
+            self.cityNameLabel.text = weather.name ?? ""
+            self.currentTempLabel.text = self.getTempInСelsius(value: weather.main?.temp ?? 0)
+            self.maximumTempLabel.text = self.getTempInСelsius(value: weather.main?.tempMax ?? 0)
+            self.minimumTempLabel.text = self.getTempInСelsius(value: weather.main?.tempMin ?? 0)
+            
+            weather.weather?.forEach { weather in
+                self.weatherStatusLabel.text = weather.description ?? ""
+                self.weatherConditionImage.image = UIImage(systemName: weather.weatherConditions)
+            }
+        }
     }
     
     private func getTempInСelsius(value: Double) -> String {
