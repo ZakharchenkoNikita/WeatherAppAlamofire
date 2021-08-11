@@ -16,6 +16,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var maximumTempLabel: UILabel!
     @IBOutlet weak var minimumTempLabel: UILabel!
     
+    @IBOutlet weak var weatherConditionImage: UIImageView!
+    
     // MARK: properties
     let networkManager = NetworkWeatherManager.shared
     
@@ -49,6 +51,7 @@ extension ViewController {
             
             weather.weather?.forEach { weather in
                 self.weatherStatusLabel.text = weather.description ?? ""
+                self.weatherConditionImage.image = UIImage(systemName: weather.weatherConditions)
             }
         }
     }
